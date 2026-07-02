@@ -85,7 +85,7 @@ spring.jpa.properties.hibernate.format_sql=true
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/CRM-App.git
+git clone https://github.com/Keshavsharma65/CRM-App.git
 ```
 
 ### 2. Open in IntelliJ IDEA

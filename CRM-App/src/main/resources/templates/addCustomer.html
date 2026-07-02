@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Customer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fc;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Add Customer</h1>
+
+    <form th:action="@{/save}" th:object="${customer}" method="post">
+
+        <input type="text" th:field="*{firstName}" placeholder="First Name">
+
+        <input type="text" th:field="*{lastName}" placeholder="Last Name">
+
+        <input type="email" th:field="*{email}" placeholder="Email">
+
+        <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number">
+
+        <button type="submit">Save Customer</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

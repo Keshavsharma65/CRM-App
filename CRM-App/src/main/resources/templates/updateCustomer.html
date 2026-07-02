@@ -1,76 +1,312 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Update Customer</title>
+    <title>Update Customer | CRM Dashboard</title>
 
     <style>
 
-        body {
-            background: #f4f7fc;
-            font-family: Arial, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .container {
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+                    135deg,
+                    #667eea 0%,
+                    #764ba2 50%,
+                    #6b73ff 100%
+            );
+            overflow: hidden;
+        }
+
+        /* Floating Background */
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 50%;
+            top: -120px;
+            left: -120px;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -80px;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(25px);
+            }
+
+        }
+
+        .card {
+
             width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+            background: rgba(255, 255, 255, .15);
+
+            backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, .25);
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+
+            animation: slideUp .8s ease;
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+        @keyframes slideUp {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(40px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
         }
 
         h1 {
+
             text-align: center;
-            margin-bottom: 20px;
+
+            color: white;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+
+        }
+
+        p {
+
+            text-align: center;
+
+            color: rgba(255, 255, 255, .8);
+
+            margin-bottom: 35px;
+
+        }
+
+        .form-group {
+
+            margin-bottom: 18px;
+
         }
 
         input {
+
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, .18);
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: .35s;
+
+            border: 2px solid transparent;
+
         }
 
-        button {
+        input::placeholder {
+
+            color: rgba(255, 255, 255, .75);
+
+        }
+
+        input:focus {
+
+            border-color: #ffd54f;
+
+            background: rgba(255, 255, 255, .25);
+
+            transform: scale(1.02);
+
+            box-shadow: 0 0 18px rgba(255, 213, 79, .45);
+
+        }
+
+        .btn {
+
             width: 100%;
-            padding: 12px;
+
+            padding: 16px;
+
             border: none;
-            border-radius: 5px;
-            background: orange;
+
+            border-radius: 50px;
+
+            background: linear-gradient(
+                    45deg,
+                    #ff9800,
+                    #ff5722
+            );
+
             color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
             cursor: pointer;
+
+            transition: .35s;
+
+            margin-top: 12px;
+
+            box-shadow: 0 10px 20px rgba(255, 152, 0, .35);
+
+        }
+
+        .btn:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow: 0 15px 30px rgba(255, 152, 0, .5);
+
+        }
+
+        .back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: white;
+
+            text-decoration: none;
+
+            transition: .3s;
+
+        }
+
+        .back:hover {
+
+            letter-spacing: 1px;
+
+            color: #ffd54f;
+
+        }
+
+        @media (max-width: 600px) {
+
+            .card {
+
+                width: 92%;
+
+                padding: 30px;
+
+            }
+
         }
 
     </style>
 
 </head>
+
 <body>
 
-<div class="container">
+<div class="card">
 
-    <h1>Update Customer</h1>
+    <h1>✏️ Update Customer</h1>
+
+    <p>Modify customer details and save the changes.</p>
 
     <form th:action="@{/updatesave}" th:object="${customer}" method="post">
+
         <input type="hidden" th:field="*{id}">
 
-        <input type="text"
-               th:field="*{firstName}">
+        <div class="form-group">
+            <input type="text"
+                   th:field="*{firstName}"
+                   placeholder="First Name"
+                   required>
+        </div>
 
-        <input type="text"
-               th:field="*{lastName}">
+        <div class="form-group">
+            <input type="text"
+                   th:field="*{lastName}"
+                   placeholder="Last Name"
+                   required>
+        </div>
 
-        <input type="email"
-               th:field="*{email}">
+        <div class="form-group">
+            <input type="email"
+                   th:field="*{email}"
+                   placeholder="Email Address"
+                   required>
+        </div>
 
-        <input type="text"
-               th:field="*{phoneNumber}">
+        <div class="form-group">
+            <input type="text"
+                   th:field="*{phoneNumber}"
+                   placeholder="Phone Number"
+                   required>
+        </div>
 
-        <button type="submit">
-            Update Customer
+        <button class="btn" type="submit">
+            ✏️ Update Customer
         </button>
 
     </form>
+
+    <a th:href="@{/view}" class="back">
+        ⬅ Back to Dashboard
+    </a>
 
 </div>
 

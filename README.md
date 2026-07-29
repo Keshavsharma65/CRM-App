@@ -1,61 +1,75 @@
 # 🚀 CRM Management System
 
-A modern Customer Relationship Management (CRM) web application built using **Spring Boot**, **Spring MVC**, **Spring Data JPA**, **Hibernate**, **Thymeleaf**, and **MySQL**.
+A modern **Customer Relationship Management (CRM)** web application built using **Spring Boot**, **Spring MVC**, **Spring Data JPA**, **Hibernate**, **Spring Security**, **Thymeleaf**, and **MySQL**.
 
-This project demonstrates a complete CRUD application with a responsive user interface and follows the MVC architecture.
-
----
-
-## 📌 Features
-
-- ➕ Add Customer
-- 📋 View All Customers
-- ✏️ Update Customer Details
-- 🗑️ Delete Customer
-- 💾 MySQL Database Integration
-- 🔄 Spring Data JPA (Hibernate)
-- 🎨 Responsive UI using HTML & CSS
-- ⚡ Server-side rendering with Thymeleaf
-- 📂 Layered Architecture (Controller → Service → Repository)
+The application demonstrates a complete customer management system following the **MVC architecture** with secure user authentication, password encryption using BCrypt, and a clean layered design.
 
 ---
 
-## 🛠️ Technologies Used
+# ✨ Features
 
-- Java 25
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Hibernate
-- Thymeleaf
-- MySQL
-- Maven
-- IntelliJ IDEA Community Edition
+* 🔐 Secure Authentication using Spring Security
+* 🔒 BCrypt Password Encryption
+* 👤 Database-based User Authentication
+* ➕ Add Customer
+* 📋 View All Customers
+* ✏️ Update Customer Details
+* 🗑️ Delete Customer
+* 💾 MySQL Database Integration
+* 🔄 Spring Data JPA (Hibernate)
+* 🎨 Responsive UI using HTML & CSS
+* ⚡ Server-side rendering with Thymeleaf
+* 📂 Layered Architecture (Controller → Service → Repository)
 
 ---
 
-## 📁 Project Structure
+# 🛠️ Technologies Used
 
-```
+* Java 25
+* Spring Boot
+* Spring MVC
+* Spring Security
+* Spring Data JPA
+* Hibernate
+* Thymeleaf
+* MySQL
+* Maven
+* IntelliJ IDEA Community Edition
+
+---
+
+# 📁 Project Structure
+
+```text
 CRM-App
 │
+├── config
+│   └── SecurityConfig.java
+│
 ├── controller
-│   └── CustomerController.java
+│   ├── CustomerController.java
+│   └── UserController.java
 │
 ├── entity
-│   └── Customer.java
+│   ├── Customer.java
+│   ├── User.java
+│   └── UserPrincipal.java
 │
-├── repository
-│   └── CustomerRepository.java
+├── repo
+│   ├── CustomerRepository.java
+│   └── UserRepository.java
 │
 ├── service
 │   ├── CustomerService.java
-│   └── CustomerServiceImpl.java
+│   ├── CustomerServiceImpl.java
+│   ├── UserService.java
+│   └── UserDetailsServiceImpl.java
 │
 ├── templates
-│   ├── viewCustomers.html
 │   ├── addCustomer.html
-│   └── updateCustomer.html
+│   ├── updateCustomer.html
+│   ├── viewCustomers.html
+│   └── login.html (if applicable)
 │
 ├── application.properties
 │
@@ -64,9 +78,22 @@ CRM-App
 
 ---
 
-## 🗄️ Database Configuration
+# 🔐 Spring Security Features
 
-Update the `application.properties` file with your MySQL credentials.
+* Custom `UserDetailsService`
+* Custom `UserPrincipal`
+* DAO Authentication Provider
+* BCrypt Password Encoding
+* HTTP Basic Authentication
+* Authentication using users stored in MySQL
+* Stateless Session Management (if configured)
+* Protected Endpoints
+
+---
+
+# 🗄️ Database Configuration
+
+Update your `application.properties` file with your own MySQL credentials.
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/crm_app
@@ -80,7 +107,7 @@ spring.jpa.properties.hibernate.format_sql=true
 
 ---
 
-## ▶️ How to Run
+# ▶️ How to Run
 
 ### 1. Clone the Repository
 
@@ -88,19 +115,19 @@ spring.jpa.properties.hibernate.format_sql=true
 git clone https://github.com/Keshavsharma65/CRM-App.git
 ```
 
-### 2. Open in IntelliJ IDEA
+### 2. Open the Project
 
-Import the project as a Maven project.
+Import the project as a Maven project in IntelliJ IDEA.
 
-### 3. Create Database
+### 3. Create the Database
 
 ```sql
 CREATE DATABASE crm_app;
 ```
 
-### 4. Configure MySQL Credentials
+### 4. Configure MySQL
 
-Edit `application.properties`.
+Update the database credentials inside `application.properties`.
 
 ### 5. Run the Application
 
@@ -110,44 +137,55 @@ Run:
 CRMApplication.java
 ```
 
-### 6. Open Browser
+### 6. Access the Application
 
 ```
-http://localhost:8080/view
+http://localhost:8080/
 ```
 
-## 📚 Concepts Covered
-
-- Spring Boot
-- MVC Architecture
-- RESTful Controller Mapping
-- Dependency Injection
-- Spring Data JPA
-- Hibernate ORM
-- CRUD Operations
-- Thymeleaf Templating
-- Form Binding
-- Model Attributes
-- Path Variables
-- MySQL Integration
+Use one of the users stored in your database to authenticate.
 
 ---
 
-## 🚀 Future Enhancements
+# 📚 Concepts Covered
 
-- 🔍 Customer Search
-- 📄 Pagination & Sorting
-- 🔐 Spring Security Authentication
-- 👤 User Roles (Admin/User)
-- 📊 Dashboard Analytics
-- 📧 Email Notifications
-- 📱 Responsive Bootstrap UI
-- ☁️ Cloud Deployment
-- 🐳 Docker Support
+* Spring Boot
+* Spring MVC
+* MVC Architecture
+* Dependency Injection (IoC)
+* Spring Data JPA
+* Hibernate ORM
+* CRUD Operations
+* Thymeleaf
+* Exception Handling
+* REST APIs
+* Spring Security
+* Authentication & Authorization Basics
+* BCrypt Password Hashing
+* Custom UserDetailsService
+* DAO Authentication Provider
+* MySQL Integration
 
 ---
 
-## 👨‍💻 Author
+# 🚀 Future Enhancements
+
+* Role-Based Authorization (Admin/User)
+* Customer Search
+* Pagination & Sorting
+* JWT Authentication
+* User Registration
+* Password Reset
+* Email Verification
+* Dashboard Analytics
+* REST API for Frontend Integration
+* React Frontend
+* Docker Support
+* Cloud Deployment (AWS / Render)
+
+---
+
+# 👨‍💻 Author
 
 **Keshav Sharma**
 
@@ -155,6 +193,6 @@ GitHub: https://github.com/Keshavsharma65
 
 ---
 
-## ⭐ If you like this project
+# ⭐ Support
 
-Give it a ⭐ on GitHub!
+If you found this project helpful, consider giving it a ⭐ on GitHub.
